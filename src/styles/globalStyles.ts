@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
-import avertaFont from '@gnosis.pm/safe-react-components/dist/fonts/averta-normal.woff2'
 import avertaBoldFont from '@gnosis.pm/safe-react-components/dist/fonts/averta-bold.woff2'
+import avertaFont from '@gnosis.pm/safe-react-components/dist/fonts/averta-normal.woff2'
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -23,6 +23,15 @@ const GlobalStyle = createGlobalStyle`
     src: local('Averta'), local('Averta Bold'),
     url(${avertaFont}) format('woff2'),
     url(${avertaBoldFont}) format('woff');
+  }
+
+  .web3connect-connect-button {
+    outline: none;
+    background: #008c73;
+    border: 1px solid #008c73;
+    color: #fff;
+    cursor: pointer;
+    transform: none;
   }
 `
 
