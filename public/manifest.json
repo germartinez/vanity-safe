@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Vanity Safe Generator",
+  "name": "Vanity Safe Generator",
+  "description": "Web app to generate a customized Safe address",
+  "iconPath": "logo512.png",
   "icons": [
     {
       "src": "favicon.ico",
