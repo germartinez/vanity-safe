@@ -1,6 +1,6 @@
 export interface NetworkConfigEntry {
   masterCopyAddress: string
-  cpkFactoryAddress: string
+  proxyFactoryAddress: string
 }
 
 export interface NetworksConfig {
@@ -10,27 +10,37 @@ export interface NetworksConfig {
 export const defaultNetworks: NetworksConfig = {
   // mainnet
   1: {
-    masterCopyAddress: '0x34CfAC646f301356fAa8B21e94227e3583Fe3F5F',
-    cpkFactoryAddress: '0x0fB4340432e56c014fa96286de17222822a9281b'
+    masterCopyAddress: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
+    proxyFactoryAddress: '0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B',
   },
-  // rinkeby
+  // rinkeby testnet
   4: {
-    masterCopyAddress: '0x34CfAC646f301356fAa8B21e94227e3583Fe3F5F',
-    cpkFactoryAddress: '0x336c19296d3989e9e0c2561ef21c964068657c38'
+    masterCopyAddress: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
+    proxyFactoryAddress: '0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B',
   },
-  // goerli
+  // goerli testnet
   5: {
-    masterCopyAddress: '0x34CfAC646f301356fAa8B21e94227e3583Fe3F5F',
-    cpkFactoryAddress: '0xfC7577774887aAE7bAcdf0Fc8ce041DA0b3200f7'
+    masterCopyAddress: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
+    proxyFactoryAddress: '0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B',
   },
-  // kovan
+  // kovan testnet
   42: {
-    masterCopyAddress: '0x34CfAC646f301356fAa8B21e94227e3583Fe3F5F',
-    cpkFactoryAddress: '0xfC7577774887aAE7bAcdf0Fc8ce041DA0b3200f7'
+    masterCopyAddress: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
+    proxyFactoryAddress: '0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B',
   },
   // xdai
   100: {
     masterCopyAddress: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
-    cpkFactoryAddress: '0xfC7577774887aAE7bAcdf0Fc8ce041DA0b3200f7'
+    proxyFactoryAddress: '0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B',
+  },
+  // energy web chain
+  246: {
+    masterCopyAddress: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
+    proxyFactoryAddress: '0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B',
+  },
+  // energy web chain volta testnet
+  73799: {
+    masterCopyAddress: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
+    proxyFactoryAddress: '0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B',
   }
 }
