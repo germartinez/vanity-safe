@@ -7,7 +7,7 @@ const Form = styled.div`
   button {
     display: block;
     margin-top: 24px;
-    width: 400px;
+    width: 100%;
   }
 `
 

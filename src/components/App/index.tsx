@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { defaultNetworks } from '../../config/networks'
 import { calculateSafeAddress } from '../../logic/safe'
 import { isValidVanitySafe } from '../../logic/vanity'
-import Web3Adapter from '../../logic/Web3Adapter'
 import Header from '../Header'
 import SearchResult from '../SearchResult'
 import Settings from '../Settings'
@@ -14,7 +12,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
 `
 
@@ -24,11 +22,12 @@ const Body = styled.div`
     flex: 1 1;
   }
 `
+const initialOutputAddress = '0x????????????????????????????????????????'
 
 const safeInitConfiguration = {
   nonce: 0,
   owner: '',
-  outputAddress: '',
+  outputAddress: initialOutputAddress,
   isValid: false
 }
 
@@ -39,9 +38,7 @@ const initialStatistics = {
 }
 
 const App = () => {
-  const [web3Adapter, setWeb3Adapter] = useState<Web3Adapter | undefined>(
-    undefined
-  )
+  const [web3, setWeb3] = useState<any | undefined>(undefined)
   const [inputAddress, setInputAddress] = useState('')
   const [safeConfiguration, setSafeConfiguration] = useState(
     safeInitConfiguration
@@ -49,14 +46,14 @@ const App = () => {
   const [statistics, setStatistics] = useState(initialStatistics)
 
   useEffect(() => {
-    const getSafeOwner = async (web3Adapter: any) => {
-      const owner = await web3Adapter.getAccount()
+    const getSafeOwner = async (web3: any) => {
+      const owner = web3.eth.defaultAccount || (await web3.eth.getAccounts())[0]
       setSafeConfiguration((state) => ({ ...state, owner }))
     }
-    if (web3Adapter) {
-      getSafeOwner(web3Adapter)
-    }
-  }, [web3Adapter])
+
+    if (!web3) return
+    getSafeOwner(web3)
+  }, [web3])
 
   useEffect(() => {
     const difficulty = inputAddress ? Math.pow(16, inputAddress.length) : 0
@@ -65,19 +62,11 @@ const App = () => {
 
   useEffect(() => {
     const step = async () => {
-      if (!web3Adapter) return
-
+      if (!web3) return
       const { owner, nonce } = safeConfiguration
-      const network = defaultNetworks[await web3Adapter.getNetworkId()]
+      const address = await calculateSafeAddress(web3, owner, nonce.toString())
 
-      const address = await calculateSafeAddress(
-        web3Adapter,
-        owner,
-        network,
-        nonce.toString()
-      )
-
-      if (!(await isValidVanitySafe(inputAddress, address, web3Adapter))) {
+      if (!(await isValidVanitySafe(inputAddress, address, web3))) {
         setSafeConfiguration((state) => ({
           ...state,
           outputAddress: address,
@@ -94,24 +83,23 @@ const App = () => {
       }
     }
 
-    if (statistics.isRunning) {
-      step()
-    }
-  }, [web3Adapter, statistics.isRunning, inputAddress, safeConfiguration])
+    if (!statistics.isRunning) return
+    step()
+  }, [web3, statistics.isRunning, inputAddress, safeConfiguration])
 
   const search = () => {
     setStatistics((state) => ({ ...state, attempts: 0, isRunning: true }))
     setSafeConfiguration((state) => ({
       ...state,
       nonce: 0,
-      outputAddress: '',
+      outputAddress: initialOutputAddress,
       isValid: false
     }))
   }
 
   return (
     <Container>
-      <Header owner={safeConfiguration.owner} setWeb3Adapter={setWeb3Adapter} />
+      <Header owner={safeConfiguration.owner} setWeb3={setWeb3} />
       <Body>
         <Settings
           search={search}
@@ -121,7 +109,11 @@ const App = () => {
         />
         <Statistics {...statistics} />
       </Body>
-      <SearchResult {...safeConfiguration} isRunning={statistics.isRunning} />
+      <SearchResult
+        {...safeConfiguration}
+        isRunning={statistics.isRunning}
+        web3={web3}
+      />
     </Container>
   )
 }
