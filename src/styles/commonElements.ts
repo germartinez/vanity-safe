@@ -9,9 +9,9 @@ export const Line = styled.div`
   display: flex;
   height: 50px;
   align-items: center;
-  & > :first-child {
+  & > p:first-child {
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 20px;
   }
 `
 
