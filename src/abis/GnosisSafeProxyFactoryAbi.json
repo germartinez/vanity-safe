@@ -1,0 +1,48 @@
+[
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "proxyCreationCode",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_mastercopy",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "initializer",
+        "type": "bytes"
+      },
+      {
+        "internalType": "uint256",
+        "name": "saltNonce",
+        "type": "uint256"
+      }
+    ],
+    "name": "createProxyWithNonce",
+    "outputs": [
+      {
+        "internalType": "contract GnosisSafeProxy",
+        "name": "proxy",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

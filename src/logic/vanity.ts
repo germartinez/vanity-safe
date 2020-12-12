@@ -1,9 +1,9 @@
-import Web3Adapter from './Web3Adapter'
+import Web3 from 'web3'
 
 export const isValidVanitySafe = async (
   inputAddress: string,
   address: string,
-  web3Adapter: Web3Adapter
+  web3: Web3
 ): Promise<boolean> => {
   const subStr = address.substr(2, inputAddress.length)
 
@@ -11,5 +11,5 @@ export const isValidVanitySafe = async (
     return false
   }
 
-  return (await web3Adapter.getCode(address)) === '0x'
+  return (await web3.eth.getCode(address)) === '0x'
 }
