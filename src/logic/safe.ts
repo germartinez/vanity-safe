@@ -85,7 +85,7 @@ export const calculateSafeAddress = async (
   const proxyAddress =
     '0x' + generateAddress2(from, salt, initCode).toString('hex')
 
-  return proxyAddress
+  return web3.utils.toChecksumAddress(proxyAddress)
 }
 
 export const deploySafeContract = async (

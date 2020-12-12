@@ -1,4 +1,9 @@
-import { Button, Text, TextField } from '@gnosis.pm/safe-react-components'
+import {
+  Button,
+  Checkbox,
+  Text,
+  TextField
+} from '@gnosis.pm/safe-react-components'
 import React from 'react'
 import styled from 'styled-components'
 import { Line, SCard } from '../../styles/commonElements'
@@ -6,22 +11,28 @@ import { Line, SCard } from '../../styles/commonElements'
 const Form = styled.div`
   button {
     display: block;
-    margin-top: 24px;
     width: 100%;
   }
 `
 
+interface SearchConfig {
+  addressPattern: string
+  isCaseSensitive: boolean
+}
+
 interface SettingsProps {
   search: any
-  inputAddress: string
-  setInputAddress: Function
+  addressPattern: string
+  isCaseSensitive: boolean
+  setSearchState: Function
   disabled: boolean
 }
 
 const Settings = ({
   search,
-  inputAddress,
-  setInputAddress,
+  addressPattern,
+  isCaseSensitive,
+  setSearchState,
   disabled
 }: SettingsProps) => {
   return (
@@ -33,12 +44,28 @@ const Settings = ({
         <TextField
           id="targetAddress"
           label="0x"
-          value={inputAddress}
-          onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
-            setInputAddress(e.target.value)
+          value={addressPattern}
+          onChange={(e) =>
+            setSearchState((state: SearchConfig) => ({
+              ...state,
+              addressPattern: e.target.value
+            }))
           }
           autoComplete="off"
         />
+        <Line>
+          <Checkbox
+            name="checkbox"
+            checked={isCaseSensitive}
+            onChange={(_, checked) =>
+              setSearchState((state: SearchConfig) => ({
+                ...state,
+                isCaseSensitive: checked
+              }))
+            }
+            label="Case-sensitive"
+          />
+        </Line>
         <Button
           size="lg"
           color="primary"

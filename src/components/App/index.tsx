@@ -24,14 +24,21 @@ const Body = styled.div`
 `
 const initialOutputAddress = '0x????????????????????????????????????????'
 
-const safeInitConfiguration = {
+const searchInitialState = {
+  addressPattern: '',
+  isCaseSensitive: false
+}
+
+const safeInitialState = {
   nonce: 0,
   owner: '',
   outputAddress: initialOutputAddress,
-  isValid: false
+  isValid: false,
+  isDeploying: false,
+  deployedAddress: ''
 }
 
-const initialStatistics = {
+const statisticInitialState = {
   attempts: 0,
   difficulty: 0,
   isRunning: false
@@ -39,16 +46,14 @@ const initialStatistics = {
 
 const App = () => {
   const [web3, setWeb3] = useState<any | undefined>(undefined)
-  const [inputAddress, setInputAddress] = useState('')
-  const [safeConfiguration, setSafeConfiguration] = useState(
-    safeInitConfiguration
-  )
-  const [statistics, setStatistics] = useState(initialStatistics)
+  const [searchState, setSearchState] = useState(searchInitialState)
+  const [safeState, setSafeState] = useState(safeInitialState)
+  const [statisticsState, setStatisticsState] = useState(statisticInitialState)
 
   useEffect(() => {
     const getSafeOwner = async (web3: any) => {
       const owner = web3.eth.defaultAccount || (await web3.eth.getAccounts())[0]
-      setSafeConfiguration((state) => ({ ...state, owner }))
+      setSafeState((state) => ({ ...state, owner }))
     }
 
     if (!web3) return
@@ -56,63 +61,86 @@ const App = () => {
   }, [web3])
 
   useEffect(() => {
-    const difficulty = inputAddress ? Math.pow(16, inputAddress.length) : 0
-    setStatistics((state) => ({ ...state, difficulty }))
-  }, [inputAddress])
+    const { addressPattern, isCaseSensitive } = searchState
+    let difficulty = 0
+    if (addressPattern) {
+      difficulty = isCaseSensitive
+        ? Math.pow(22, addressPattern.length)
+        : Math.pow(16, addressPattern.length)
+    }
+    setStatisticsState((state) => ({ ...state, difficulty }))
+  }, [searchState])
 
   useEffect(() => {
     const step = async () => {
       if (!web3) return
-      const { owner, nonce } = safeConfiguration
+      const { owner, nonce } = safeState
+      const { addressPattern, isCaseSensitive } = searchState
       const address = await calculateSafeAddress(web3, owner, nonce.toString())
 
-      if (!(await isValidVanitySafe(inputAddress, address, web3))) {
-        setSafeConfiguration((state) => ({
+      if (
+        !(await isValidVanitySafe(
+          addressPattern,
+          isCaseSensitive,
+          address,
+          web3
+        ))
+      ) {
+        setSafeState((state) => ({
           ...state,
           outputAddress: address,
           nonce: state.nonce + 1
         }))
-        setStatistics((state) => ({ ...state, attempts: state.attempts + 1 }))
+        setStatisticsState((state) => ({
+          ...state,
+          attempts: state.attempts + 1
+        }))
       } else {
-        setSafeConfiguration((state) => ({
+        setSafeState((state) => ({
           ...state,
           outputAddress: address,
           isValid: true
         }))
-        setStatistics((state) => ({ ...state, isRunning: false }))
+        setStatisticsState((state) => ({ ...state, isRunning: false }))
       }
     }
 
-    if (!statistics.isRunning) return
+    if (!statisticsState.isRunning) return
     step()
-  }, [web3, statistics.isRunning, inputAddress, safeConfiguration])
+  }, [web3, statisticsState.isRunning, searchState, safeState])
 
   const search = () => {
-    setStatistics((state) => ({ ...state, attempts: 0, isRunning: true }))
-    setSafeConfiguration((state) => ({
+    setStatisticsState((state) => ({ ...state, attempts: 0, isRunning: true }))
+    setSafeState((state) => ({
       ...state,
       nonce: 0,
       outputAddress: initialOutputAddress,
-      isValid: false
+      isValid: false,
+      isDeploying: false,
+      deployedAddress: ''
     }))
   }
 
   return (
     <Container>
-      <Header owner={safeConfiguration.owner} setWeb3={setWeb3} />
+      <Header owner={safeState.owner} setWeb3={setWeb3} />
       <Body>
         <Settings
           search={search}
-          inputAddress={inputAddress}
-          setInputAddress={setInputAddress}
-          disabled={!safeConfiguration.owner || statistics.isRunning}
+          {...searchState}
+          setSearchState={setSearchState}
+          disabled={
+            !safeState.owner ||
+            !searchState.addressPattern ||
+            statisticsState.isRunning
+          }
         />
-        <Statistics {...statistics} />
+        <Statistics {...statisticsState} />
       </Body>
       <SearchResult
-        {...safeConfiguration}
-        isRunning={statistics.isRunning}
+        safeState={safeState}
         web3={web3}
+        setSafeState={setSafeState}
       />
     </Container>
   )

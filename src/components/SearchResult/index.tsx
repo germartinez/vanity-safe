@@ -38,33 +38,44 @@ const SButton = styled(Button)`
   float: right;
 `
 
-interface SearchResultProps {
-  isValid: boolean
-  outputAddress: string
-  owner: string
+interface SafeState {
   nonce: number
-  isRunning: boolean
+  owner: string
+  outputAddress: string
+  isValid: boolean
+  isDeploying: boolean
+  deployedAddress: string
+}
+
+interface SearchResultProps {
+  safeState: SafeState
   web3: any
+  setSafeState: Function
 }
 
 const SearchResult = (searchResultProps: SearchResultProps) => {
-  const [deployedSafe, setDeployedSafe] = useState('')
-  const [isDeploying, setIsDeploying] = useState(false)
-
+  const { safeState, web3, setSafeState } = searchResultProps
   const {
-    isValid,
-    outputAddress,
-    owner,
     nonce,
-    isRunning,
-    web3
-  } = searchResultProps
+    owner,
+    outputAddress,
+    isValid,
+    isDeploying,
+    deployedAddress
+  } = safeState
 
   const deploySafe = async (owner: string, nonce: number) => {
-    setIsDeploying(true)
-    const safeAddress = await deploySafeContract(owner, nonce, web3)
-    setDeployedSafe(safeAddress)
-    setIsDeploying(false)
+    setSafeState((state: SafeState) => ({ ...state, isDeploying: true }))
+    try {
+      const safeAddress = await deploySafeContract(owner, nonce, web3)
+      setSafeState((state: SafeState) => ({
+        ...state,
+        deployedAddress: safeAddress
+      }))
+    } catch (e) {
+      setSafeState((state: SafeState) => ({ ...state, deployedAddress: '' }))
+    }
+    setSafeState((state: SafeState) => ({ ...state, isDeploying: false }))
   }
 
   return (
@@ -89,13 +100,13 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
           <SLoader size="sm" />
         </LineCenter>
       )}
-      {deployedSafe && (
+      {deployedAddress && (
         <LineCenter>
           <Text size="xl">Congratulations! Your Safe is ready!</Text>
         </LineCenter>
       )}
       <ResultButtonsBox>
-        {!deployedSafe ? (
+        {!deployedAddress ? (
           <SButton
             size="lg"
             color="primary"
@@ -107,7 +118,7 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
           </SButton>
         ) : (
           <a
-            href={`https://rinkeby.gnosis-safe.io/app/#/safes/${deployedSafe}`}
+            href={`https://rinkeby.gnosis-safe.io/app/#/safes/${deployedAddress}`}
             target="_blank"
             rel="noreferrer"
           >
