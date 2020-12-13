@@ -29,10 +29,10 @@ const GlobalStyle = createGlobalStyle`
   /* web3connect styles */
   .web3connect-connect-button {
     outline: none;
-    background: #008c73;
-    border: 1px solid #008c73;
+    background: #008C73;
+    border: 1px solid #008C73;
     border-radius: 4px;
-    color: #fff;
+    color: #FFF;
     cursor: pointer;
     transform: none;
     padding: 0 25px;

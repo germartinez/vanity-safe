@@ -41,6 +41,7 @@ const safeInitialState = {
 const statisticInitialState = {
   attempts: 0,
   difficulty: 0,
+  probability: 0,
   isRunning: false
 }
 
@@ -93,7 +94,8 @@ const App = () => {
         }))
         setStatisticsState((state) => ({
           ...state,
-          attempts: state.attempts + 1
+          attempts: state.attempts + 1,
+          probability: 1 - Math.pow(1 - 1 / state.difficulty, state.attempts)
         }))
       } else {
         setSafeState((state) => ({
@@ -110,7 +112,12 @@ const App = () => {
   }, [web3, statisticsState.isRunning, searchState, safeState])
 
   const search = () => {
-    setStatisticsState((state) => ({ ...state, attempts: 0, isRunning: true }))
+    setStatisticsState((state) => ({
+      ...state,
+      attempts: 0,
+      probability: 0,
+      isRunning: true
+    }))
     setSafeState((state) => ({
       ...state,
       nonce: 0,

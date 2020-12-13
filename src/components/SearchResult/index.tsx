@@ -4,17 +4,13 @@ import {
   Loader,
   Text
 } from '@gnosis.pm/safe-react-components'
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { deploySafeContract } from '../../logic/safe'
-import { Line, LineCenter, SCard } from '../../styles/commonElements'
+import { LineCenter, SCard } from '../../styles/commonElements'
 
 const SLoader = styled(Loader)`
   margin-left: 5px;
-`
-
-const SLine = styled(Line)`
-  float: left;
 `
 
 interface AddressBoxProps {
@@ -23,14 +19,11 @@ interface AddressBoxProps {
 const AddressBox = styled.div<AddressBoxProps>`
   opacity: ${(p) => (p.opaque ? 0.2 : 1)};
   min-width: 490px;
-  --border: 1px solid red;
 `
 
 const ResultButtonsBox = styled.div`
-  --border: 1px solid red;
   display: flex;
   justify-content: center;
-  --width: 384px;
   margin: 20px auto 0;
 `
 
