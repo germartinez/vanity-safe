@@ -1,6 +1,7 @@
 {
   "name": "vanity-safe-generator",
   "version": "0.1.0",
+  "homepage": "https://germartinez.github.io/vanity-safe-generator/",
   "private": true,
   "dependencies": {
     "@gnosis.pm/safe-react-components": "^0.3.0",
@@ -18,6 +19,7 @@
     "@walletconnect/web3-provider": "^1.3.1",
     "ethereumjs-abi": "^0.6.8",
     "ethereumjs-util": "^7.0.7",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -32,7 +34,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,json}"
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,json}",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
