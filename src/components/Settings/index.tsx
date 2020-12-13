@@ -9,11 +9,9 @@ import styled from 'styled-components'
 import { Line, SCard } from '../../styles/commonElements'
 
 const Form = styled.div`
-  @media screen and (max-width: 950px) {
-    text-align: center;
-  }
   button {
     display: block;
+    margin-top: 24px;
     width: 100%;
   }
   .eAuvgm {
@@ -33,6 +31,7 @@ interface SettingsProps {
   search: any
   addressPattern: string
   isCaseSensitive: boolean
+  saltNonce: string
   setSearchState: Function
   disabled: boolean
 }
@@ -41,15 +40,16 @@ const Settings = ({
   search,
   addressPattern,
   isCaseSensitive,
+  saltNonce,
   setSearchState,
   disabled
 }: SettingsProps) => {
   return (
     <SCard>
-      <Line>
-        <Text size="xl">Safe address prefix:</Text>
-      </Line>
       <Form>
+        <Line>
+          <Text size="xl">Safe address prefix:</Text>
+        </Line>
         <TextField
           id="targetAddress"
           label="0x"
@@ -75,6 +75,21 @@ const Settings = ({
             label="Case-sensitive"
           />
         </Line>
+        <Line>
+          <Text size="xl">Start with salt-nonce:</Text>
+        </Line>
+        <TextField
+          id="saltNonce"
+          label="Salt nonce"
+          value={saltNonce}
+          onChange={(e) =>
+            setSearchState((state: SearchConfig) => ({
+              ...state,
+              saltNonce: e.target.value
+            }))
+          }
+          autoComplete="off"
+        />
         <Button
           size="lg"
           color="primary"

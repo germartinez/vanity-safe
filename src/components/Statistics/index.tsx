@@ -28,14 +28,23 @@ const Percentage = styled.div`
 `
 
 interface StatisticsProps {
-  attempts: number
   difficulty: number
+  attempts: number
+  initialSaltNonce: number
+  currentSaltNonce: number
   probability: number
   isRunning: boolean
 }
 
 const Statistics = (statistics: StatisticsProps) => {
-  const { difficulty, attempts, probability, isRunning } = statistics
+  const {
+    difficulty,
+    attempts,
+    probability,
+    isRunning,
+    initialSaltNonce,
+    currentSaltNonce
+  } = statistics
   return (
     <SCard>
       <Line>
@@ -44,7 +53,13 @@ const Statistics = (statistics: StatisticsProps) => {
       </Line>
       <Line>
         <Text size="xl">Generated:</Text>
-        <Text size="xl">{formatNumber(attempts)} addresses</Text>
+        <Text size="xl">{formatNumber(attempts)}</Text>
+      </Line>
+      <Line>
+        <Text size="xl">Salt-nonces checked:</Text>
+        <Text size="xl">
+          {formatNumber(initialSaltNonce)} - {formatNumber(currentSaltNonce)}
+        </Text>
       </Line>
       <Line>
         <Text size="xl">Probability:</Text>

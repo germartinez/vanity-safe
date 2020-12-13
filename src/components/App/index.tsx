@@ -31,7 +31,8 @@ const initialOutputAddress =
 
 const searchInitialState = {
   addressPattern: '',
-  isCaseSensitive: false
+  isCaseSensitive: false,
+  saltNonce: '0'
 }
 
 const safeInitialState = {
@@ -44,8 +45,10 @@ const safeInitialState = {
 }
 
 const statisticInitialState = {
-  attempts: 0,
   difficulty: 0,
+  attempts: 0,
+  initialSaltNonce: 0,
+  currentSaltNonce: 0,
   probability: 0,
   isRunning: false
 }
@@ -100,6 +103,7 @@ const App = () => {
         setStatisticsState((state) => ({
           ...state,
           attempts: state.attempts + 1,
+          currentSaltNonce: state.currentSaltNonce + 1,
           probability: 1 - Math.pow(1 - 1 / state.difficulty, state.attempts)
         }))
       } else {
@@ -113,19 +117,26 @@ const App = () => {
     }
 
     if (!statisticsState.isRunning) return
-    step()
+    try {
+      step()
+    } catch (e) {
+      console.error(e)
+      setStatisticsState((state) => ({ ...state, isRunning: false }))
+    }
   }, [web3, statisticsState.isRunning, searchState, safeState])
 
   const search = () => {
     setStatisticsState((state) => ({
       ...state,
-      attempts: 0,
+      attempts: 1,
+      initialSaltNonce: parseInt(searchState.saltNonce),
+      currentSaltNonce: parseInt(searchState.saltNonce),
       probability: 0,
       isRunning: true
     }))
     setSafeState((state) => ({
       ...state,
-      nonce: 0,
+      nonce: parseInt(searchState.saltNonce),
       outputAddress: initialOutputAddress,
       isValid: false,
       isDeploying: false,
@@ -144,6 +155,7 @@ const App = () => {
           disabled={
             !safeState.owner ||
             !searchState.addressPattern ||
+            !searchState.saltNonce ||
             statisticsState.isRunning
           }
         />

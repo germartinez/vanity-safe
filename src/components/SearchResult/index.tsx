@@ -7,7 +7,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { deploySafeContract } from '../../logic/safe'
-import { Line, LineCenter, SCard } from '../../styles/commonElements'
+import { LineCenter, SCard } from '../../styles/commonElements'
 
 interface AddressBoxProps {
   opaque: boolean
