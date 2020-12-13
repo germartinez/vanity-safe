@@ -1,18 +1,26 @@
-import { EthHashInfo, Text, Title } from '@gnosis.pm/safe-react-components'
+import { EthHashInfo, Title } from '@gnosis.pm/safe-react-components'
 import React from 'react'
 import styled from 'styled-components'
 import Web3 from 'web3'
 import { Line, SCard } from '../../styles/commonElements'
 import ConnectButton from './ConnectButton'
 
-const Card = styled(SCard)`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `
 
 const STitle = styled(Title)`
   color: #008c73;
+  padding: 0 15px 0 0;
+  @media screen and (max-width: 500px) {
+    padding: 0 0 15px 0;
+  }
 `
 
 interface HeaderProps {
@@ -29,18 +37,18 @@ const Header = ({ owner, setWeb3 }: HeaderProps) => {
   }
 
   return (
-    <Card>
-      <STitle size="md" withoutMargin>
-        Vanity Safe Generator
-      </STitle>
-      <Line>
-        {!owner ? (
-          <ConnectButton onConnect={onWeb3Connect} />
-        ) : (
-          <>
-            <Text size="xl">Safe owner:</Text>
+    <SCard>
+      <Wrapper>
+        <STitle size="md" withoutMargin>
+          Vanity Safe Generator
+        </STitle>
+        <Line>
+          {!owner ? (
+            <ConnectButton onConnect={onWeb3Connect} />
+          ) : (
             <EthHashInfo
               hash={owner}
+              name="Safe owner:"
               showIdenticon
               identiconSize="lg"
               textSize="xl"
@@ -48,10 +56,10 @@ const Header = ({ owner, setWeb3 }: HeaderProps) => {
               showEtherscanBtn
               shortenHash={4}
             />
-          </>
-        )}
-      </Line>
-    </Card>
+          )}
+        </Line>
+      </Wrapper>
+    </SCard>
   )
 }
 

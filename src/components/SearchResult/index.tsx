@@ -4,31 +4,50 @@ import {
   Loader,
   Text
 } from '@gnosis.pm/safe-react-components'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { deploySafeContract } from '../../logic/safe'
-import { LineCenter, SCard } from '../../styles/commonElements'
+import { Line, LineCenter, SCard } from '../../styles/commonElements'
+
+interface AddressBoxProps {
+  opaque: boolean
+}
+
+const AddressBox = styled.div<AddressBoxProps>`
+  opacity: ${(p) => (p.opaque ? 0.2 : 1)};
+  min-width: 490px;
+  @media screen and (max-width: 950px) {
+    min-width: 100%;
+    width: 100%;
+  }
+`
+
+const ResultProcess = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 10px 0;
+`
 
 const SLoader = styled(Loader)`
   margin-left: 5px;
 `
 
-interface AddressBoxProps {
-  opaque: boolean
-}
-const AddressBox = styled.div<AddressBoxProps>`
-  opacity: ${(p) => (p.opaque ? 0.2 : 1)};
-  min-width: 490px;
+const Link = styled.a`
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
 
 const ResultButtonsBox = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px auto 0;
-`
-
-const SButton = styled(Button)`
-  float: right;
+  button {
+    @media screen and (max-width: 950px) {
+      width: 100%;
+    }
+  }
 `
 
 interface SafeState {
@@ -47,6 +66,7 @@ interface SearchResultProps {
 }
 
 const SearchResult = (searchResultProps: SearchResultProps) => {
+  const [isScreenWidthSmall, setIsScreenWidthSmall] = useState(false)
   const { safeState, web3, setSafeState } = searchResultProps
   const {
     nonce,
@@ -56,6 +76,14 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
     isDeploying,
     deployedAddress
   } = safeState
+
+  useEffect(() => {
+    if (window.innerWidth <= 650) {
+      setIsScreenWidthSmall(true)
+      return
+    }
+    setIsScreenWidthSmall(false)
+  }, [isValid])
 
   const deploySafe = async (owner: string, nonce: number) => {
     setSafeState((state: SafeState) => ({ ...state, isDeploying: true }))
@@ -74,33 +102,35 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
   return (
     <SCard>
       <LineCenter>
-        <Text size="xl">Safe address:</Text>
         <AddressBox opaque={!isValid}>
           <EthHashInfo
             hash={outputAddress}
+            name="Safe address:"
             showIdenticon
             identiconSize="lg"
             textSize="xl"
             network="rinkeby"
             showCopyBtn={isValid}
             showEtherscanBtn={isValid}
+            shortenHash={isScreenWidthSmall ? 8 : 0}
           />
         </AddressBox>
       </LineCenter>
-
       {isDeploying && (
-        <LineCenter>
+        <ResultProcess>
           <SLoader size="sm" />
-        </LineCenter>
+        </ResultProcess>
       )}
       {deployedAddress && (
-        <LineCenter>
-          <Text size="xl">Congratulations! Your Safe is ready!</Text>
-        </LineCenter>
+        <ResultProcess>
+          <LineCenter>
+            <Text size="xl" color="primary">Congratulations! Your Safe is ready!</Text>
+          </LineCenter>
+        </ResultProcess>
       )}
       <ResultButtonsBox>
         {!deployedAddress ? (
-          <SButton
+          <Button
             size="lg"
             color="primary"
             variant="contained"
@@ -108,17 +138,17 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
             disabled={!isValid}
           >
             Deploy Safe
-          </SButton>
+          </Button>
         ) : (
-          <a
+          <Link
             href={`https://rinkeby.gnosis-safe.io/app/#/safes/${deployedAddress}`}
             target="_blank"
             rel="noreferrer"
           >
-            <SButton size="lg" color="primary" variant="contained">
+            <Button size="lg" color="primary" variant="contained">
               Open in Safe Multisig app
-            </SButton>
-          </a>
+            </Button>
+          </Link>
         )}
       </ResultButtonsBox>
     </SCard>

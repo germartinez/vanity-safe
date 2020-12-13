@@ -9,9 +9,18 @@ import styled from 'styled-components'
 import { Line, SCard } from '../../styles/commonElements'
 
 const Form = styled.div`
+  @media screen and (max-width: 950px) {
+    text-align: center;
+  }
   button {
     display: block;
     width: 100%;
+  }
+  .eAuvgm {
+    @media screen and (max-width: 950px) {
+      max-width: 100%;
+      width: 100%;
+    }
   }
 `
 

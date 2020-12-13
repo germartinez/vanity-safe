@@ -3,6 +3,14 @@ import styled from 'styled-components'
 
 export const SCard = styled(Card)`
   margin: 24px;
+  @media screen and (max-width: 950px) {
+    margin: 10px auto;
+    width: 600px;
+  }
+  @media screen and (max-width: 650px) {
+    margin: 10px 0;
+    width: 100%;
+  }
 `
 
 export const Line = styled.div`
@@ -11,7 +19,7 @@ export const Line = styled.div`
   align-items: center;
   & > p:first-child {
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 10px;
   }
 `
 

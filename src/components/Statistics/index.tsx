@@ -6,8 +6,9 @@ import { formatNumber, formatPercentage } from '../../utils'
 
 const Bar = styled.div`
   background: #f0efee;
-  width: 140px;
-  margin-right: 20px;
+  --width: 140px;
+  flex: 1;
+  margin-right: 10px;
   border-radius: 4px;
   overflow: hidden;
 `
@@ -20,6 +21,10 @@ const FilledBar = styled.div<FilledBarProps>`
   background: #008c73;
   height: 15px;
   width: ${(p) => p.width + '%'};
+`
+
+const Percentage = styled.div`
+  width: 65px;
 `
 
 interface StatisticsProps {
@@ -46,7 +51,9 @@ const Statistics = (statistics: StatisticsProps) => {
         <Bar>
           <FilledBar width={formatPercentage(probability)}></FilledBar>
         </Bar>
-        <Text size="xl">{formatPercentage(probability)}%</Text>
+        <Percentage>
+          <Text size="xl">{formatPercentage(probability)}%</Text>
+        </Percentage>
       </Line>
       <Line>
         <Text size="xl">Status:</Text>
