@@ -12,10 +12,10 @@ const Web3ConnectButton = styled.div`
 
   .web3connect-connect-button {
     outline: none;
-    background: #008C73;
-    border: 1px solid #008C73;
+    background: #008c73;
+    border: 1px solid #008c73;
     border-radius: 4px;
-    color: #FFF;
+    color: #fff;
     cursor: pointer;
     transform: none;
     padding: 0 25px;

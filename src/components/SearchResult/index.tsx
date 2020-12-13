@@ -124,7 +124,9 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
       {deployedAddress && (
         <ResultProcess>
           <LineCenter>
-            <Text size="xl" color="primary">Congratulations! Your Safe is ready!</Text>
+            <Text size="xl" color="primary">
+              Congratulations! Your Safe is ready!
+            </Text>
           </LineCenter>
         </ResultProcess>
       )}
