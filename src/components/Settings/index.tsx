@@ -9,14 +9,13 @@ import styled from 'styled-components'
 import { Line, SCard } from '../../styles/commonElements'
 
 const Form = styled.div`
-  button {
+  .MuiButton-root {
     display: block;
     margin-top: 24px;
     width: 100%;
   }
-  .eAuvgm {
+  .MuiTextField-root {
     @media screen and (max-width: 950px) {
-      max-width: 100%;
       width: 100%;
     }
   }

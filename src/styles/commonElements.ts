@@ -1,4 +1,4 @@
-import { Card } from '@gnosis.pm/safe-react-components'
+import { Card, EthHashInfo } from '@gnosis.pm/safe-react-components'
 import styled from 'styled-components'
 
 export const SCard = styled(Card)`
@@ -25,4 +25,10 @@ export const Line = styled.div`
 
 export const LineCenter = styled(Line)`
   justify-content: center;
+`
+
+export const SEthHashInfo = styled(EthHashInfo)`
+  & > div > p {
+    font-weight: bold;
+  }
 `

@@ -1,8 +1,8 @@
-import { EthHashInfo, Title } from '@gnosis.pm/safe-react-components'
+import { Title } from '@gnosis.pm/safe-react-components'
 import React from 'react'
 import styled from 'styled-components'
 import Web3 from 'web3'
-import { Line, SCard } from '../../styles/commonElements'
+import { Line, SCard, SEthHashInfo } from '../../styles/commonElements'
 import ConnectButton from './ConnectButton'
 
 const Wrapper = styled.div`
@@ -46,7 +46,7 @@ const Header = ({ owner, setWeb3 }: HeaderProps) => {
           {!owner ? (
             <ConnectButton onConnect={onWeb3Connect} />
           ) : (
-            <EthHashInfo
+            <SEthHashInfo
               hash={owner}
               name="Safe owner:"
               showIdenticon

@@ -28,13 +28,6 @@ const GlobalStyle = createGlobalStyle`
     url(${avertaFont}) format('woff2'),
     url(${avertaBoldFont}) format('woff');
   }
-
-  /* EthHashInfo styles */
-  .fZMulI {
-    & > p:first-child {
-      font-weight: bold;
-    }
-  }
 `
 
 export default GlobalStyle

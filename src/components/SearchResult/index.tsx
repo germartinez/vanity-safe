@@ -1,13 +1,8 @@
-import {
-  Button,
-  EthHashInfo,
-  Loader,
-  Text
-} from '@gnosis.pm/safe-react-components'
+import { Button, Loader, Text } from '@gnosis.pm/safe-react-components'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { deploySafeContract } from '../../logic/safe'
-import { LineCenter, SCard } from '../../styles/commonElements'
+import { LineCenter, SCard, SEthHashInfo } from '../../styles/commonElements'
 
 interface AddressBoxProps {
   opaque: boolean
@@ -43,7 +38,7 @@ const ResultButtonsBox = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px auto 0;
-  button {
+  .MuiButton-root {
     @media screen and (max-width: 950px) {
       width: 100%;
     }
@@ -103,7 +98,7 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
     <SCard>
       <LineCenter>
         <AddressBox opaque={!isValid}>
-          <EthHashInfo
+          <SEthHashInfo
             hash={outputAddress}
             name="Safe address:"
             showIdenticon

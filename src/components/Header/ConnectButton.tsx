@@ -9,7 +9,9 @@ const {
 const Web3ConnectButton = styled.div`
   display: flex;
   justify-content: center;
-
+  & div {
+    padding: 0;
+  }
   .web3connect-connect-button {
     outline: none;
     background: #008c73;
@@ -23,13 +25,7 @@ const Web3ConnectButton = styled.div`
     font-size: 14px;
     box-shadow: none;
   }
-  .sc-bdVaJa {
-    padding: 0;
-  }
-  .idCQSl {
-    transform: none;
-  }
-  .idCQSl:hover {
+  .web3connect-connect-button:hover {
     background: #005546;
     box-shadow: none;
     transform: none;
