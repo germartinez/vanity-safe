@@ -16,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: #F7F5F5;
+    @media screen and (max-width: 950px) {
+      padding: 10px;
+    }
   }
 
   @font-face {
@@ -26,30 +29,11 @@ const GlobalStyle = createGlobalStyle`
     url(${avertaBoldFont}) format('woff');
   }
 
-  /* web3connect styles */
-  .web3connect-connect-button {
-    outline: none;
-    background: #008C73;
-    border: 1px solid #008C73;
-    border-radius: 4px;
-    color: #FFF;
-    cursor: pointer;
-    transform: none;
-    padding: 0 25px;
-    font-weight: normal;
-    font-size: 14px;
-    box-shadow: none;
-  }
-  .sc-bdVaJa {
-    padding: 0;
-  }
-  .idCQSl {
-    transform: none;
-  }
-  .idCQSl:hover {
-    background: #005546;
-    box-shadow: none;
-    transform: none;
+  /* EthHashInfo styles */
+  .fZMulI {
+    & > p:first-child {
+      font-weight: bold;
+    }
   }
 `
 
