@@ -155,6 +155,7 @@ const App = () => {
           setSearchState={setSearchState}
           disabled={
             !safeState.owner ||
+            safeState.isDeploying ||
             !searchState.addressPattern ||
             !searchState.saltNonce ||
             statisticsState.isRunning

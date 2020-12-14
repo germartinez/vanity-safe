@@ -136,7 +136,7 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
             color="primary"
             variant="contained"
             onClick={() => deploySafe(owner, nonce)}
-            disabled={!isValid}
+            disabled={!isValid || isDeploying}
           >
             Deploy Safe
           </Button>
