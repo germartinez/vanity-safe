@@ -126,6 +126,7 @@ const App = () => {
   }, [web3, statisticsState.isRunning, searchState, safeState])
 
   const search = () => {
+    window.scrollTo(0,document.body.scrollHeight)
     setStatisticsState((state) => ({
       ...state,
       attempts: 1,
