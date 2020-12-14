@@ -10,8 +10,8 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   @media screen and (max-width: 500px) {
+    align-items: stretch;
     flex-direction: column;
-    text-align: center;
   }
 `
 
@@ -20,7 +20,12 @@ const STitle = styled(Title)`
   padding: 0 15px 0 0;
   @media screen and (max-width: 500px) {
     padding: 0 0 15px 0;
+    text-align: center;
   }
+`
+
+const SSEthHashInfo = styled(SEthHashInfo)`
+  margin: 0 auto;
 `
 
 interface HeaderProps {
@@ -46,7 +51,7 @@ const Header = ({ owner, setWeb3 }: HeaderProps) => {
           {!owner ? (
             <ConnectButton onConnect={onWeb3Connect} />
           ) : (
-            <SEthHashInfo
+            <SSEthHashInfo
               hash={owner}
               name="Safe owner:"
               showIdenticon

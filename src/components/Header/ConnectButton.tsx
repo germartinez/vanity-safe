@@ -9,8 +9,14 @@ const {
 const Web3ConnectButton = styled.div`
   display: flex;
   justify-content: center;
-  & div {
+  width: 100%;
+  & > div {
     padding: 0;
+  }
+  @media screen and (max-width: 500px) {
+    & > div {
+      max-width: 100%;
+    }
   }
   .web3connect-connect-button {
     outline: none;
