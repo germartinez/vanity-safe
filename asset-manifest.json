@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/vanity-safe-generator/static/js/main.7eea138f.chunk.js",
-    "main.js.map": "/vanity-safe-generator/static/js/main.7eea138f.chunk.js.map",
+    "main.js": "/vanity-safe-generator/static/js/main.5de24f93.chunk.js",
+    "main.js.map": "/vanity-safe-generator/static/js/main.5de24f93.chunk.js.map",
     "runtime-main.js": "/vanity-safe-generator/static/js/runtime-main.5fb5734b.js",
     "runtime-main.js.map": "/vanity-safe-generator/static/js/runtime-main.5fb5734b.js.map",
     "static/js/2.4ea1f7e0.chunk.js": "/vanity-safe-generator/static/js/2.4ea1f7e0.chunk.js",
@@ -16,6 +16,6 @@
   "entrypoints": [
     "static/js/runtime-main.5fb5734b.js",
     "static/js/2.4ea1f7e0.chunk.js",
-    "static/js/main.7eea138f.chunk.js"
+    "static/js/main.5de24f93.chunk.js"
   ]
 }
