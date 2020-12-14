@@ -6,7 +6,6 @@ import { formatNumber, formatPercentage } from '../../utils'
 
 const Bar = styled.div`
   background: #f0efee;
-  --width: 140px;
   flex: 1;
   margin-right: 10px;
   border-radius: 4px;
@@ -52,11 +51,11 @@ const Statistics = (statistics: StatisticsProps) => {
         <Text size="xl">{formatNumber(difficulty)}</Text>
       </Line>
       <Line>
-        <Text size="xl">Generated:</Text>
+        <Text size="xl">Generated addresses:</Text>
         <Text size="xl">{formatNumber(attempts)}</Text>
       </Line>
       <Line>
-        <Text size="xl">Salt-nonces checked:</Text>
+        <Text size="xl">Nonces checked:</Text>
         <Text size="xl">
           {formatNumber(initialSaltNonce)} - {formatNumber(currentSaltNonce)}
         </Text>

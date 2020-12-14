@@ -15,9 +15,7 @@ const Form = styled.div`
     width: 100%;
   }
   .MuiTextField-root {
-    @media screen and (max-width: 950px) {
-      width: 100%;
-    }
+    width: 100%;
   }
 `
 
@@ -75,7 +73,7 @@ const Settings = ({
           />
         </Line>
         <Line>
-          <Text size="xl">Start with salt-nonce:</Text>
+          <Text size="xl">Start with nonce:</Text>
         </Line>
         <TextField
           id="saltNonce"

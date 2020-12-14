@@ -80,6 +80,10 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
     setIsScreenWidthSmall(false)
   }, [isValid])
 
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight)
+  }, [isDeploying])
+
   const deploySafe = async (owner: string, nonce: number) => {
     setSafeState((state: SafeState) => ({ ...state, isDeploying: true }))
     try {
@@ -89,7 +93,7 @@ const SearchResult = (searchResultProps: SearchResultProps) => {
         deployedAddress: safeAddress
       }))
     } catch (e) {
-      setSafeState((state: SafeState) => ({ ...state, deployedAddress: '' }))
+      console.error(e)
     }
     setSafeState((state: SafeState) => ({ ...state, isDeploying: false }))
   }
