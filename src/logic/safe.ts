@@ -21,11 +21,12 @@ const getSafeContracts = async (
   web3: Web3,
   network: NetworkConfigEntry
 ): Promise<SafeContractsResult> => {
-  if (!safeMasterCopy || !safeMasterCopy) {
+  if (!safeMasterCopy) {
     const GnosisSafe = TruffleContract({ abi: GnosisSafeAbi })
     GnosisSafe.setProvider(web3.currentProvider)
     safeMasterCopy = await GnosisSafe.at(network.masterCopyAddress)
-
+  }
+  if (!safeProxyFactory) {
     const ProxyFactory = TruffleContract({ abi: GnosisSafeProxyFactoryAbi })
     ProxyFactory.setProvider(web3.currentProvider)
     safeProxyFactory = await ProxyFactory.at(network.proxyFactoryAddress)
