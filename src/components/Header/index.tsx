@@ -45,7 +45,7 @@ const Header = ({ owner, setWeb3 }: HeaderProps) => {
     <SCard>
       <Wrapper>
         <STitle size="md" withoutMargin>
-          Vanity Safe Generator
+          Vanity Safe
         </STitle>
         <Line>
           {!owner ? (

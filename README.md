@@ -1,8 +1,8 @@
-# Vanity Safe Generator
+# Vanity Safe
 
 Generate and deploy a [Gnosis Safe](https://github.com/gnosis/safe-contracts) with a custom address.
 
-App can be found live here: https://germartinez.github.io/vanity-safe-generator/
+App can be found live here: https://germartinez.github.io/vanity-safe/
 
 ## Available Scripts
 
