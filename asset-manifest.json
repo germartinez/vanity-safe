@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.js": "/vanity-safe-generator/static/js/main.6d941174.chunk.js",
-    "main.js.map": "/vanity-safe-generator/static/js/main.6d941174.chunk.js.map",
-    "runtime-main.js": "/vanity-safe-generator/static/js/runtime-main.5fb5734b.js",
-    "runtime-main.js.map": "/vanity-safe-generator/static/js/runtime-main.5fb5734b.js.map",
-    "static/js/2.4ea1f7e0.chunk.js": "/vanity-safe-generator/static/js/2.4ea1f7e0.chunk.js",
-    "static/js/2.4ea1f7e0.chunk.js.map": "/vanity-safe-generator/static/js/2.4ea1f7e0.chunk.js.map",
-    "static/js/3.f69a327a.chunk.js": "/vanity-safe-generator/static/js/3.f69a327a.chunk.js",
-    "static/js/3.f69a327a.chunk.js.map": "/vanity-safe-generator/static/js/3.f69a327a.chunk.js.map",
-    "index.html": "/vanity-safe-generator/index.html",
-    "static/js/2.4ea1f7e0.chunk.js.LICENSE.txt": "/vanity-safe-generator/static/js/2.4ea1f7e0.chunk.js.LICENSE.txt",
-    "static/media/averta-bold.woff2": "/vanity-safe-generator/static/media/averta-bold.8fdcd8d4.woff2",
-    "static/media/averta-normal.woff2": "/vanity-safe-generator/static/media/averta-normal.39d04879.woff2"
+    "main.js": "/vanity-safe/static/js/main.f16dc257.chunk.js",
+    "main.js.map": "/vanity-safe/static/js/main.f16dc257.chunk.js.map",
+    "runtime-main.js": "/vanity-safe/static/js/runtime-main.00fa8c7c.js",
+    "runtime-main.js.map": "/vanity-safe/static/js/runtime-main.00fa8c7c.js.map",
+    "static/js/2.057fd981.chunk.js": "/vanity-safe/static/js/2.057fd981.chunk.js",
+    "static/js/2.057fd981.chunk.js.map": "/vanity-safe/static/js/2.057fd981.chunk.js.map",
+    "static/js/3.667063c3.chunk.js": "/vanity-safe/static/js/3.667063c3.chunk.js",
+    "static/js/3.667063c3.chunk.js.map": "/vanity-safe/static/js/3.667063c3.chunk.js.map",
+    "index.html": "/vanity-safe/index.html",
+    "static/js/2.057fd981.chunk.js.LICENSE.txt": "/vanity-safe/static/js/2.057fd981.chunk.js.LICENSE.txt",
+    "static/media/averta-bold.woff2": "/vanity-safe/static/media/averta-bold.8fdcd8d4.woff2",
+    "static/media/averta-normal.woff2": "/vanity-safe/static/media/averta-normal.39d04879.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.5fb5734b.js",
-    "static/js/2.4ea1f7e0.chunk.js",
-    "static/js/main.6d941174.chunk.js"
+    "static/js/runtime-main.00fa8c7c.js",
+    "static/js/2.057fd981.chunk.js",
+    "static/js/main.f16dc257.chunk.js"
   ]
 }
